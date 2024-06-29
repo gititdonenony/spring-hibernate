@@ -38,7 +38,7 @@
 		<property name="commandName" value="addUser" />
 		<property name="commandClass"
 			value="com.akhm.controller.command.AddUserCommand" />
-		<property name="succesView" value="users" />
+		<property name="successView" value="users" />
 
 	</bean>
 	<bean
