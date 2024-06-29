@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+
+	<bean id="sessFact"
+		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="configLocation"
+			value="classpath:hibernate.cfg.xml">
+		</property>
+	</bean>
+	<bean class="org.springframework.orm.hibernate3.HibernateTemplate"
+		id="ht">
+		<property name="sessionFactory" ref="sessFact" />
+
+
+	</bean>
+	<bean class="com.akhm.dao.impl.UserDAOImpl" id="userDAO">
+		<constructor-arg>
+			<ref bean="ht" />
+
+		</constructor-arg>
+
+	</bean>
+
+	<bean class="com.akhm.service.impl.UserServiceImpl"
+		id="userService">
+		<constructor-arg ref="userDAO" />
+
+	</bean>
+
+
+	<bean class="com.akhm.controller.UserRegistrationController"
+		id="userRegistrationController">
+		<property name="userService" ref="userService" />
+		<property name="formView" value="adduser" />
+		<property name="commandName" value="addUser" />
+		<property name="commandClass"
+			value="com.akhm.controller.command.AddUserCommand" />
+		<property name="succesView" value="users" />
+
+	</bean>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver"
+		id="viewResolver">
+		<property name="prefix" value="/WEB-INF/pages/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping"
+		id="simpleUrlHandlerMapping">
+		<property name="mappings">
+			<props>
+				<prop key="/adduser.htm">
+					userRegistrationController
+				</prop>
+			</props>
+		</property>
+	</bean>
+
+
+</beans>

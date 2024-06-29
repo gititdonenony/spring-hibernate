@@ -1,0 +1,30 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="com.akhm.dao.model.UserTl" table="userTl">
+		<id name="userId" type="java.lang.Integer" column="USER_ID">
+			<generator class="increment" />
+		</id>
+		<property name="firstName" type="java.lang.String"
+			column="FIRST_NAME" length="50" not-null="true" />
+
+		<property name="lastName" type="java.lang.String"
+			column="LAST_NAME" length="50" not-null="true" />
+
+		<property name="emailId" type="java.lang.String"
+			column="EMAIL_ID" length="50" not-null="true" />
+
+		<property name="mobileNumber" type="java.lang.String"
+			column="MOBILE_NUMBER" length="10" not-null="true" />
+
+		<property name="passWord" type="java.lang.String"
+			column="PASSWORD" length="50" not-null="true" />
+
+		<property name="Dob" type="java.lang.Date"
+			column="DATE_OF_BIRTH" not-null="true" />
+
+	</class>
+</hibernate-mapping>
